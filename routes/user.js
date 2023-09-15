@@ -12,6 +12,7 @@ router.get('/', [
     check('desde', 'El desde debe de ser un numero').optional().isNumeric(),
     validarCampos
 ], usersGet);
+
 router.post('/', [
     check('nombre', 'El nombre es obligatorio').notEmpty(),
     check('correo', 'El correo no es válido').isEmail(),
@@ -21,12 +22,15 @@ router.post('/', [
     check('correo').custom( emailExiste ),
     validarCampos
 ], usersPost);
+
 router.put('/:id', [
     check('id').custom( existeUsuarioID ),
     check('rol').custom( esRolValido ),
     validarCampos
 ], usersPut);
+
 router.patch('/', usersPatch);
+
 router.delete('/:id', [
     validarJWT,
     validarAdminRole,
